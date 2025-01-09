@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject waitingRoomPanel;
     [SerializeField] private GameObject joinRoomPanel;
     [SerializeField] private TMP_Text roomCodeText;
-    [SerializeField] private TMP_InputField roomCodeInput;
+    [SerializeField] private InputField roomCodeInput;
     [SerializeField] private Button enterRoomButton; 
 
     private void Start()
