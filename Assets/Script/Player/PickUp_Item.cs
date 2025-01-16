@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PickUp_Item : MonoBehaviour
 {
-    public bool canCollectItem = false;
-    public Item currentItem;
+    public bool canCollectItem = false;  
+    public Item currentItem; 
 
     void Update()
     {
         if (canCollectItem && Input.GetKeyDown(KeyCode.E))
         {
-            CollectItem();
+            CollectItem(); 
         }
     }
 
@@ -19,9 +19,39 @@ public class PickUp_Item : MonoBehaviour
     {
         if (currentItem != null)
         {
-            // ¾ÆÀÌÅÛÀ» È¹µæÇÏ´Â ·ÎÁ÷ (¿¹: ÀÎº¥Åä¸®¿¡ Ãß°¡)
-            Debug.Log("¾ÆÀÌÅÛ È¹µæ: " + currentItem.itemName);
-            Destroy(currentItem.gameObject); // ¾ÆÀÌÅÛÀ» ¾À¿¡¼­ Á¦°Å
+            Inventory playerInventory = GetComponent<Inventory>();
+            for (int i = 0; i < playerInventory.slots.Count; i++)
+            {
+                if (playerInventory.slots[i].isEmpty)
+                {
+                    playerInventory.slots[i].StoreItem(currentItem.gameObject);
+                    Debug.Log(currentItem.itemName + " ì•„ì´í…œì„ ì¸ë²¤í† ë¦¬ì— ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.");
+                    Destroy(currentItem.gameObject);  
+                    currentItem = null;
+                    canCollectItem = false; 
+                    break;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            currentItem = collision.GetComponent<Item>();  
+            canCollectItem = true;  
+            Debug.Log("Eí‚¤ë¥¼ ëˆŒëŸ¬ " + currentItem.itemName + " ì•„ì´í…œì„ íšë“í•˜ì„¸ìš”.");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            canCollectItem = false; 
+            currentItem = null;
+            Debug.Log("ì•„ì´í…œ ì˜ì—­ì„ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤.");
         }
     }
 }

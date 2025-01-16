@@ -10,7 +10,7 @@ public class Player_Movement : MonoBehaviour
     float h;
     float v;
     bool isHorizonMove;
-
+    bool canMove = true; 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -18,17 +18,21 @@ public class Player_Movement : MonoBehaviour
 
     private void Update()
     {
-        // Move Value
+        if (!canMove)
+        {
+            h = 0;
+            v = 0;
+            return;
+        }
+
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        // Check Button Down & Up
         bool hDown = Input.GetButtonDown("Horizontal");
         bool vDown = Input.GetButtonDown("Vertical");
         bool hUp = Input.GetButtonUp("Horizontal");
         bool vUp = Input.GetButtonUp("Vertical");
 
-        // Check Horizontal Move
         if (hDown || vUp)
         {
             isHorizonMove = true;
@@ -41,8 +45,18 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Move
+        if (!canMove)  
+        {
+            rigid.velocity = Vector2.zero;
+            return;
+        }
+
         Vector2 moveVec = isHorizonMove ? new Vector2(h, 0) : new Vector2(0, v);
         rigid.velocity = moveVec * Speed;
+    }
+
+    public void SetMovementEnabled(bool enabled)
+    {
+        canMove = enabled;  
     }
 }

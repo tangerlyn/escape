@@ -1,25 +1,109 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<SlotData> slots = new List<SlotData>();
-    private int maxSlot = 3;
-    public GameObject slotPrefab;
+    public GameObject inventoryUI;  
+    public GameObject AboutInventoryUI;
+    public List<InventorySlot> slots = new List<InventorySlot>();
+    private bool isInventoryOpen = false;
 
-    private void Start()
+    private int selectedSlotIndex = 0; 
+    public Color normalColor = Color.white; 
+    public Color selectedColor = Color.red;  
+    private Player_Movement playerMovement; 
+
+    private void Update()
     {
-        GameObject slotPanel = GameObject.Find("Panel");
-
-        for(int i = 0; i < maxSlot; i++)
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            GameObject go = Instantiate(slotPrefab, slotPanel.transform, false);
-            go.name = "Slot_" + i;
-            SlotData slot = new SlotData();
-            slot.isEmpty = true;
-            slot.slotObj = go;
-            slots.Add(slot);
+            ToggleInventory();
+        }
+
+        if (isInventoryOpen)
+        {
+            HandleSlotSelection(); 
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                DeleteSelectedItem();  
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                EquipSelectedItem(); 
+            }
+        }
+    }
+
+private void Start()
+{
+    playerMovement = FindObjectOfType<Player_Movement>(); 
+}
+
+private void ToggleInventory()
+{
+    isInventoryOpen = !isInventoryOpen;
+    inventoryUI.SetActive(isInventoryOpen); 
+    AboutInventoryUI.SetActive(isInventoryOpen);
+
+    if (isInventoryOpen)
+    {
+        HighlightSlot(selectedSlotIndex);  
+        playerMovement.SetMovementEnabled(false);  
+    }
+    else
+    {
+        playerMovement.SetMovementEnabled(true);  
+    }
+}
+
+    private void HandleSlotSelection()
+    {
+        int previousSlotIndex = selectedSlotIndex;
+
+        if (Input.GetKeyDown(KeyCode.W) && selectedSlotIndex >= 3) selectedSlotIndex -= 3; 
+        if (Input.GetKeyDown(KeyCode.S) && selectedSlotIndex < slots.Count - 3) selectedSlotIndex += 3; 
+        if (Input.GetKeyDown(KeyCode.A) && selectedSlotIndex % 3 != 0) selectedSlotIndex -= 1;
+        if (Input.GetKeyDown(KeyCode.D) && selectedSlotIndex % 3 != 2) selectedSlotIndex += 1;  
+
+        if (previousSlotIndex != selectedSlotIndex)
+        {
+            HighlightSlot(selectedSlotIndex);
+        }
+    }
+
+    private void HighlightSlot(int index)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Image slotImage = slots[i].GetComponent<Image>();
+            slotImage.color = i == index ? selectedColor : normalColor;  
+        }
+    }
+
+private void DeleteSelectedItem()
+{
+    InventorySlot selectedSlot = slots[selectedSlotIndex];
+    if (!selectedSlot.isEmpty)
+    {
+        selectedSlot.RemoveItem(); 
+        Debug.Log("아이템을 삭제했습니다.");
+    }
+}
+
+    private void EquipSelectedItem()
+    {
+        InventorySlot selectedSlot = slots[selectedSlotIndex];
+        if (!selectedSlot.isEmpty)
+        {
+            GameObject itemInSlot = selectedSlot.storedItem;
+            if (itemInSlot != null)
+            {
+                Debug.Log("아이템을 손에 듭니다: " + itemInSlot.name);
+                selectedSlot.isEmpty = true;
+                Instantiate(itemInSlot, transform.position + Vector3.up, Quaternion.identity); 
+                Destroy(selectedSlot.storedItem);
+            }
         }
     }
 }

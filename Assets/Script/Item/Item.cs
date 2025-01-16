@@ -4,27 +4,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public string itemName;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            // ¾ÆÀÌÅÛÀ» È¹µæÇÒ ¼ö ÀÖ´Â »óÅÂ·Î ¼³Á¤
-            PickUp_Item player = collision.GetComponent<PickUp_Item>();
-            player.canCollectItem = true;
-            player.currentItem = this;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            // ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ¿¡¼­ ¸Ö¾îÁö¸é È¹µæ ºÒ°¡´É »óÅÂ·Î ¼³Á¤
-            PickUp_Item player = collision.GetComponent<PickUp_Item>();
-            player.canCollectItem = false;
-            player.currentItem = null;
-        }
-    }
+    public string itemName;  // ì•„ì´í…œ ì´ë¦„
+    
 }
