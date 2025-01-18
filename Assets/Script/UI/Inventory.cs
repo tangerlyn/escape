@@ -14,6 +14,14 @@ public class Inventory : MonoBehaviour
     public Color selectedColor = Color.red;  
     private Player_Movement playerMovement; 
 
+    private bool isItemZoomed = false; 
+    private InventorySlot zoomedSlot;
+
+    private void Start()
+    {
+        playerMovement = FindObjectOfType<Player_Movement>(); 
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
@@ -23,42 +31,47 @@ public class Inventory : MonoBehaviour
 
         if (isInventoryOpen)
         {
-            HandleSlotSelection(); 
+            HandleSlotSelection();
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                DeleteSelectedItem();  
+                DeleteSelectedItem();
             }
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                EquipSelectedItem(); 
+                EquipSelectedItem();
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ToggleItemZoom();
             }
         }
     }
 
-private void Start()
-{
-    playerMovement = FindObjectOfType<Player_Movement>(); 
-}
-
-private void ToggleInventory()
-{
-    isInventoryOpen = !isInventoryOpen;
-    inventoryUI.SetActive(isInventoryOpen); 
-    AboutInventoryUI.SetActive(isInventoryOpen);
-
-    if (isInventoryOpen)
+    private void ToggleInventory()
     {
-        HighlightSlot(selectedSlotIndex);  
-        playerMovement.SetMovementEnabled(false);  
+        isInventoryOpen = !isInventoryOpen;
+        inventoryUI.SetActive(isInventoryOpen); 
+        AboutInventoryUI.SetActive(isInventoryOpen);
+
+        if (isInventoryOpen)
+        {
+            HighlightSlot(selectedSlotIndex);  
+            playerMovement.SetMovementEnabled(false);  
+        }
+        else
+        {
+            if (isItemZoomed) ToggleItemZoom();
+            playerMovement.SetMovementEnabled(true);  
+        }
     }
-    else
-    {
-        playerMovement.SetMovementEnabled(true);  
-    }
-}
 
     private void HandleSlotSelection()
     {
+        if (isItemZoomed) return; 
+
         int previousSlotIndex = selectedSlotIndex;
 
         if (Input.GetKeyDown(KeyCode.W) && selectedSlotIndex >= 3) selectedSlotIndex -= 3; 
@@ -81,18 +94,79 @@ private void ToggleInventory()
         }
     }
 
-private void DeleteSelectedItem()
+private void ToggleItemZoom()
 {
     InventorySlot selectedSlot = slots[selectedSlotIndex];
-    if (!selectedSlot.isEmpty)
+
+    if (isItemZoomed)
     {
-        selectedSlot.RemoveItem(); 
-        Debug.Log("아이템을 삭제했습니다.");
+        RectTransform zoomedSlotRect = zoomedSlot.GetComponent<RectTransform>();
+        Image zoomedSlotImage = zoomedSlot.GetComponent<Image>();
+
+        zoomedSlotRect.sizeDelta = zoomedSlot.originalSlotSize;
+        zoomedSlotRect.anchoredPosition = zoomedSlot.originalPosition;
+        zoomedSlotImage.color = zoomedSlot.originalColor; 
+        zoomedSlot.transform.SetParent(inventoryUI.transform);
+
+        foreach (var slot in slots)
+        {
+            slot.gameObject.SetActive(true);
+        }
+
+        inventoryUI.GetComponent<GridLayoutGroup>().enabled = true;
+        isItemZoomed = false;
+        zoomedSlot = null;
+    }
+    else if (!selectedSlot.isEmpty)
+    {
+        zoomedSlot = selectedSlot;
+        RectTransform zoomedSlotRect = zoomedSlot.GetComponent<RectTransform>();
+        Image zoomedSlotImage = zoomedSlot.GetComponent<Image>();
+        RectTransform slot4Rect = slots[4].GetComponent<RectTransform>();
+
+        zoomedSlot.originalPosition = zoomedSlotRect.anchoredPosition;
+        zoomedSlot.originalColor = zoomedSlotImage.color; 
+
+        foreach (var slot in slots)
+        {
+            if (slot != selectedSlot)
+            {
+                slot.gameObject.SetActive(false);
+            }
+        }
+
+        inventoryUI.GetComponent<GridLayoutGroup>().enabled = false;
+
+        zoomedSlot.transform.SetParent(inventoryUI.transform);
+        zoomedSlotRect.sizeDelta = new Vector2(300, 300);
+
+        float adjustedX = slot4Rect.anchoredPosition.x - 150f;
+        float posY = slot4Rect.anchoredPosition.y;
+        zoomedSlotRect.anchoredPosition = new Vector2(adjustedX, posY);
+
+        zoomedSlotImage.color = Color.white; 
+        isItemZoomed = true;
     }
 }
 
+
+
+    private void DeleteSelectedItem()
+    {
+        if (isItemZoomed) return; 
+
+        InventorySlot selectedSlot = slots[selectedSlotIndex];
+        if (!selectedSlot.isEmpty)
+        {
+            selectedSlot.RemoveItem(); 
+            Debug.Log("아이템을 삭제했습니다.");
+        }
+    }
+
     private void EquipSelectedItem()
     {
+        if (isItemZoomed) return; 
+
         InventorySlot selectedSlot = slots[selectedSlotIndex];
         if (!selectedSlot.isEmpty)
         {

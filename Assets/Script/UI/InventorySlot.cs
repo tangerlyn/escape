@@ -3,28 +3,25 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public GameObject slotObj;  
-    public bool isEmpty = true;  
-    public GameObject storedItem;  
+    public GameObject slotObj;
+    public bool isEmpty = true;
+    public GameObject storedItem;
 
-    private Image slotImage;  
-
-    private RectTransform slotRectTransform;  
-    private RectTransform itemRectTransform;  
-
-    private Vector2 originalSlotSize = new Vector2(100f, 100f); 
-    private Vector2 expandedSlotSize = new Vector2(300f, 300f);  
-    private Vector2 originalItemSize; 
-
-    private bool isExpanded = false;  
+    public Vector2 originalSlotSize = new Vector2(100f, 100f);
+    public Vector2 originalItemSize;
+    public Vector2 originalPosition;
+    public Color originalColor; 
 
     private void Awake()
     {
-        slotRectTransform = GetComponent<RectTransform>();
+        RectTransform slotRectTransform = GetComponent<RectTransform>();
+        Image slotImage = GetComponent<Image>();
+        originalColor = slotImage.color; 
+
         if (storedItem != null)
         {
-            itemRectTransform = storedItem.GetComponent<RectTransform>();
-            originalItemSize = itemRectTransform.sizeDelta;  
+            RectTransform itemRect = storedItem.GetComponent<RectTransform>();
+            originalItemSize = itemRect.sizeDelta;
         }
     }
 
@@ -32,24 +29,23 @@ public class InventorySlot : MonoBehaviour
     {
         storedItem = item;
         isEmpty = false;
+
+        RectTransform itemRect = item.GetComponent<RectTransform>();
+        originalItemSize = itemRect.sizeDelta; 
     }
 
-public void RemoveItem()
-{
-    
-    if (slotObj.transform.childCount > 0)
+    public void RemoveItem()
     {
-        for (int i = 0; i < slotObj.transform.childCount; i++)
+        if (slotObj.transform.childCount > 0)
         {
-            GameObject child = slotObj.transform.GetChild(i).gameObject;
-            Destroy(child); 
+            for (int i = 0; i < slotObj.transform.childCount; i++)
+            {
+                GameObject child = slotObj.transform.GetChild(i).gameObject;
+                Destroy(child);
+            }
         }
+
+        isEmpty = true;
+        storedItem = null;
     }
-
-    isEmpty = true;  
-    storedItem = null; 
-}
-
-
-
 }
