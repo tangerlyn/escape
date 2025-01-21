@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b80cbc5e6789c4189ec30e2d8fe5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceRecorder: {fileID: 0}
+  voiceRecorder: {fileID: 1228917574}
   voiceUI: {fileID: 0}
 --- !u!4 &4705934
 Transform:
