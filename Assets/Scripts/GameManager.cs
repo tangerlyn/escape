@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -16,5 +14,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("EscapeScene");
         }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
     }
 }
