@@ -10,14 +10,22 @@ public class InventorySlot : MonoBehaviour
     public Vector2 originalSlotSize = new Vector2(100f, 100f);
     public Vector2 originalItemSize;
     public Vector2 originalPosition;
-    public Color originalColor; 
+    public Color originalColor;
 
     private void Awake()
     {
         RectTransform slotRectTransform = GetComponent<RectTransform>();
         Image slotImage = GetComponent<Image>();
-        originalColor = slotImage.color; 
+        originalColor = slotImage.color;
 
+        if (storedItem != null)
+        {
+            StoreItemSize();
+        }
+    }
+
+    private void StoreItemSize()
+    {
         if (storedItem != null)
         {
             RectTransform itemRect = storedItem.GetComponent<RectTransform>();
@@ -29,9 +37,16 @@ public class InventorySlot : MonoBehaviour
     {
         storedItem = item;
         isEmpty = false;
+        StoreItemSize();
+    }
 
-        RectTransform itemRect = item.GetComponent<RectTransform>();
-        originalItemSize = itemRect.sizeDelta; 
+    public void ScaleItem(float scale)
+    {
+        if (storedItem != null)
+        {
+            RectTransform itemRect = storedItem.GetComponent<RectTransform>();
+            itemRect.localScale = Vector3.one * scale;
+        }
     }
 
     public void RemoveItem()

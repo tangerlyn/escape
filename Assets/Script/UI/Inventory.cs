@@ -105,8 +105,13 @@ private void ToggleItemZoom()
 
         zoomedSlotRect.sizeDelta = zoomedSlot.originalSlotSize;
         zoomedSlotRect.anchoredPosition = zoomedSlot.originalPosition;
-        zoomedSlotImage.color = zoomedSlot.originalColor; 
-        zoomedSlot.transform.SetParent(inventoryUI.transform);
+        zoomedSlotImage.color = zoomedSlot.originalColor;
+
+        if (zoomedSlot.slotObj.transform.childCount > 0)
+        {
+            RectTransform itemRect = zoomedSlot.slotObj.transform.GetChild(0).GetComponent<RectTransform>();
+            itemRect.localScale = Vector3.one;
+        }
 
         foreach (var slot in slots)
         {
@@ -140,6 +145,12 @@ private void ToggleItemZoom()
         zoomedSlot.transform.SetParent(inventoryUI.transform);
         zoomedSlotRect.sizeDelta = new Vector2(300, 300);
 
+        if (zoomedSlot.slotObj.transform.childCount > 0)
+        {
+            RectTransform itemRect = zoomedSlot.slotObj.transform.GetChild(0).GetComponent<RectTransform>();
+            itemRect.localScale = new Vector3(2f, 2f, 2f);
+        }
+
         float adjustedX = slot4Rect.anchoredPosition.x - 150f;
         float posY = slot4Rect.anchoredPosition.y;
         zoomedSlotRect.anchoredPosition = new Vector2(adjustedX, posY);
@@ -148,9 +159,6 @@ private void ToggleItemZoom()
         isItemZoomed = true;
     }
 }
-
-
-
     private void DeleteSelectedItem()
     {
         if (isItemZoomed) return; 
