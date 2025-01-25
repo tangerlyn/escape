@@ -32,19 +32,22 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    private void CollectItem()
+private void CollectItem()
+{
+    for (int i = 0; i < playerInventory.slots.Count; i++)
     {
-        for (int i = 0; i < playerInventory.slots.Count; i++)
+        if (playerInventory.slots[i].isEmpty)
         {
-            if (playerInventory.slots[i].isEmpty)
-            {
-                Instantiate(slotItem, playerInventory.slots[i].slotObj.transform.position, Quaternion.identity, playerInventory.slots[i].slotObj.transform);
-                playerInventory.slots[i].isEmpty = false;
-                Destroy(gameObject);  
-                Debug.Log("아이템을 인벤토리에 추가했습니다.");
-                canCollectItem = false;
-                break;
-            }
+            GameObject newItem = Instantiate(slotItem, playerInventory.slots[i].slotObj.transform.position, Quaternion.identity, playerInventory.slots[i].slotObj.transform);
+
+            playerInventory.slots[i].storedItem = newItem; 
+            playerInventory.slots[i].isEmpty = false;
+
+            Destroy(gameObject); 
+            Debug.Log("아이템을 인벤토리에 추가했습니다.");
+            canCollectItem = false;
+            break;
         }
     }
+}
 }

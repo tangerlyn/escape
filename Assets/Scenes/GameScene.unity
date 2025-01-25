@@ -176,6 +176,10 @@ MonoBehaviour:
   slotObj: {fileID: 108666213}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &108666216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +602,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e768d1815e3ed98408bf84cfeaf0a263, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -681,6 +685,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Card
+--- !u!1 &670047071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670047072}
+  m_Layer: 0
+  m_Name: HandPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670047072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670047071}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.54, y: -0.62, z: -5.071419}
+  m_LocalScale: {x: 0.72601, y: 0.72601, z: 0.72601}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 966087571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747179751
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +770,10 @@ MonoBehaviour:
   slotObj: {fileID: 747179751}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &747179754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +1034,10 @@ MonoBehaviour:
   slotObj: {fileID: 797399764}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &797399767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,6 +1332,10 @@ MonoBehaviour:
   slotObj: {fileID: 950366754}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &950366757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,6 +1467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  handPosition: {fileID: 670047072}
+  heldItem: {fileID: 0}
 --- !u!61 &966087568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1556,7 +1605,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 670047072}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966087572
@@ -1639,6 +1689,10 @@ MonoBehaviour:
   slotObj: {fileID: 972087159}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &972087162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,6 +1829,10 @@ MonoBehaviour:
   slotObj: {fileID: 1103979159}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1103979162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1911,6 +1969,10 @@ MonoBehaviour:
   slotObj: {fileID: 1306842488}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1306842491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,6 +2109,10 @@ MonoBehaviour:
   slotObj: {fileID: 1391082734}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1391082737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,6 +2359,10 @@ MonoBehaviour:
   slotObj: {fileID: 1834900131}
   isEmpty: 1
   storedItem: {fileID: 0}
+  originalSlotSize: {x: 100, y: 100}
+  originalItemSize: {x: 0, y: 0}
+  originalPosition: {x: 0, y: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1834900134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,6 +2648,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1739609472}
     m_Modifications:
+    - target: {fileID: 395178929607482970, guid: 33af9c1e30fd8fa43a6c0eac5d83ad09, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1843677769831387232, guid: 33af9c1e30fd8fa43a6c0eac5d83ad09, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1000.80585

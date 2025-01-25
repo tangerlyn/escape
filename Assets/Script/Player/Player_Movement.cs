@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
     public float Speed;
+    public Transform handPosition;
+    private Rigidbody2D rigid;
+    private float h;
+    private float v;
+    private bool isHorizonMove;
+    private bool canMove = true;
+    public GameObject heldItem;
 
-    Rigidbody2D rigid;
-    float h;
-    float v;
-    bool isHorizonMove;
-    bool canMove = true; 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -33,19 +33,15 @@ public class Player_Movement : MonoBehaviour
         bool hUp = Input.GetButtonUp("Horizontal");
         bool vUp = Input.GetButtonUp("Vertical");
 
-        if (hDown || vUp)
-        {
-            isHorizonMove = true;
-        }
-        else if (vDown || hUp)
-        {
-            isHorizonMove = false;
-        }
+        if (hDown || vUp) isHorizonMove = true;
+        else if (vDown || hUp) isHorizonMove = false;
+
+        UpdateHeldItemPosition();
     }
 
     private void FixedUpdate()
     {
-        if (!canMove)  
+        if (!canMove)
         {
             rigid.velocity = Vector2.zero;
             return;
@@ -55,8 +51,32 @@ public class Player_Movement : MonoBehaviour
         rigid.velocity = moveVec * Speed;
     }
 
+    private void UpdateHeldItemPosition()
+    {
+        if (heldItem != null)
+        {
+            heldItem.transform.position = handPosition.position;
+        }
+    }
+
     public void SetMovementEnabled(bool enabled)
     {
-        canMove = enabled;  
+        canMove = enabled;
+    }
+
+    public void HoldItem(GameObject itemPrefab)
+    {
+        if (heldItem != null)
+        {
+            Destroy(heldItem);
+        }
+
+        if (handPosition != null && itemPrefab != null)
+        {
+            heldItem = Instantiate(itemPrefab, handPosition);
+            heldItem.transform.localPosition = Vector3.zero;
+            heldItem.transform.localRotation = Quaternion.identity;
+            heldItem.transform.localScale = Vector3.one * 0.25f;
+        }
     }
 }
