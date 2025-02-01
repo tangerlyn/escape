@@ -6,6 +6,7 @@ public class InstrumentInteraction : MonoBehaviour
 
     private AudioSource audioSource;
     private bool playerInRange = false;
+    private Inventory inventory; 
 
     void Start()
     {
@@ -18,12 +19,20 @@ public class InstrumentInteraction : MonoBehaviour
         audioSource.clip = instrumentSound;
         audioSource.volume = 1f;
         audioSource.loop = false;
+
+        inventory = FindObjectOfType<Inventory>();
     }
 
     void Update()
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
+            if (inventory != null && inventory.inventoryUI.activeSelf)
+            {
+                Debug.Log("인벤토리 창이 열려있어 악기 소리 재생이 중지됩니다.");
+                return;
+            }
+
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
