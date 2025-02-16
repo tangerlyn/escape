@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -10,19 +11,40 @@ public class InventorySlot : MonoBehaviour
     public Vector2 originalPosition;
     public Color originalColor;
 
-    public void StoreItem(GameObject item)
+public void StoreItem(GameObject itemPrefab)
+{
+    RemoveItem();
+
+    storedItem = Instantiate(itemPrefab, slotObj.transform);
+    storedItem.transform.localScale = Vector3.one; 
+
+    RectTransform itemRect = storedItem.GetComponent<RectTransform>();
+    Image itemImage = storedItem.GetComponent<Image>();
+
+    if (itemRect != null && itemImage != null)
     {
-        RemoveItem();
-        storedItem = Instantiate(item, slotObj.transform);
-        RectTransform itemRect = storedItem.GetComponent<RectTransform>();
-
-        itemRect.anchorMin = Vector2.zero;
-        itemRect.anchorMax = Vector2.one;
+        itemRect.anchorMin = new Vector2(0.5f, 0.5f);
+        itemRect.anchorMax = new Vector2(0.5f, 0.5f);
         itemRect.anchoredPosition = Vector2.zero;
-        itemRect.sizeDelta = Vector2.zero;
+        itemRect.sizeDelta = Vector2.zero; 
 
-        isEmpty = false;
+        AspectRatioFitter arf = storedItem.GetComponent<AspectRatioFitter>();
+        if (arf == null)
+        {
+            arf = storedItem.AddComponent<AspectRatioFitter>();
+        }
+        arf.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+        
+        if (itemImage.sprite != null)
+        {
+            float aspect = itemImage.sprite.rect.width / itemImage.sprite.rect.height;
+            arf.aspectRatio = aspect;
+        }
     }
+    
+    isEmpty = false;
+}
+
 
     public void RemoveItem()
     {

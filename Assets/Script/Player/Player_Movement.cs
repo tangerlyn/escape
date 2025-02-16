@@ -11,6 +11,9 @@ public class Player_Movement : MonoBehaviour
     private bool canMove = true;
     public GameObject heldItem;
 
+    public static int currentDropSortingOrder = 50;
+
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -18,6 +21,11 @@ public class Player_Movement : MonoBehaviour
 
     private void Update()
     {
+        if (canMove && Input.GetKeyDown(KeyCode.R))
+        {
+            DropItem();
+        }
+
         if (!canMove)
         {
             h = 0;
@@ -33,10 +41,17 @@ public class Player_Movement : MonoBehaviour
         bool hUp = Input.GetButtonUp("Horizontal");
         bool vUp = Input.GetButtonUp("Vertical");
 
-        if (hDown || vUp) isHorizonMove = true;
-        else if (vDown || hUp) isHorizonMove = false;
+        if (hDown || vUp) 
+            isHorizonMove = true;
+        else if (vDown || hUp) 
+            isHorizonMove = false;
 
         UpdateHeldItemPosition();
+
+        if (canMove && Input.GetKeyDown(KeyCode.R))
+        {
+            DropItem();
+        }
     }
 
     private void FixedUpdate()
@@ -66,9 +81,20 @@ public class Player_Movement : MonoBehaviour
 
     public void HoldItem(GameObject itemPrefab)
     {
+        Inventory playerInventory = FindObjectOfType<Inventory>();
+
         if (heldItem != null)
         {
+            for (int i = 0; i < playerInventory.slots.Count; i++)
+            {
+                if (playerInventory.slots[i].isEmpty)
+                {
+                    playerInventory.slots[i].StoreItem(heldItem);
+                    break;
+                }
+            }
             Destroy(heldItem);
+            heldItem = null;
         }
 
         if (handPosition != null && itemPrefab != null)
@@ -76,7 +102,36 @@ public class Player_Movement : MonoBehaviour
             heldItem = Instantiate(itemPrefab, handPosition);
             heldItem.transform.localPosition = Vector3.zero;
             heldItem.transform.localRotation = Quaternion.identity;
-            heldItem.transform.localScale = Vector3.one * 0.25f;
+          
+            heldItem.transform.localScale = Vector3.one * 0.5f;
+
+            SpriteRenderer[] itemRenderers = heldItem.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in itemRenderers)
+            {
+                sr.sortingOrder = 101;
+            }
         }
     }
+
+    public void DropItem()
+    {
+        if (heldItem != null)
+        {
+            Vector3 dropPosition = handPosition.position + transform.right * 1.0f;
+
+            
+            heldItem.transform.SetParent(null);
+            heldItem.transform.position = dropPosition;
+            heldItem.transform.localScale = Vector3.one;  
+            SpriteRenderer[] dropRenderers = heldItem.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in dropRenderers)
+            {
+                sr.sortingOrder = currentDropSortingOrder;
+            }
+            currentDropSortingOrder++;
+
+            heldItem = null;
+        }
+    }
+
 }
