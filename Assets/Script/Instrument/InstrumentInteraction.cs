@@ -3,6 +3,7 @@ using UnityEngine;
 public class InstrumentInteraction : MonoBehaviour
 {
     public AudioClip instrumentSound;
+    public int instrumentID;  
 
     private AudioSource audioSource;
     private bool playerInRange = false;
@@ -12,9 +13,7 @@ public class InstrumentInteraction : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
-        {
             audioSource = gameObject.AddComponent<AudioSource>();
-        }
         
         audioSource.clip = instrumentSound;
         audioSource.volume = 1f;
@@ -36,7 +35,12 @@ public class InstrumentInteraction : MonoBehaviour
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
-                Debug.Log("악기 소리 재생됨.");
+                Debug.Log("악기 소리 재생됨. ID: " + instrumentID);
+
+                if (InstrumentManager.Instance != null)
+                {
+                    InstrumentManager.Instance.RegisterInstrument(instrumentID);
+                }
             }
         }
     }
