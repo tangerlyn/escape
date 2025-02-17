@@ -45,7 +45,7 @@ public class InstrumentManager : MonoBehaviour
         if (playedSequence.Count == correctSequence.Length)
         {
             puzzleSolved = true;
-            Debug.Log("악기 퍼즐 해결! 계단이 나타납니다.");
+            Debug.Log("정답 -> 계단이 나타납니다.");
             SpawnStaircase();
         }
     }
