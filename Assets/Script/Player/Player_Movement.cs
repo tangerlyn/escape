@@ -113,25 +113,55 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-    public void DropItem()
+public void DropItem()
+{
+    if (heldItem != null)
     {
-        if (heldItem != null)
+        // 캐릭터 위치를 기준으로 드랍
+        Vector3 dropPosition = transform.position;
+        heldItem.transform.SetParent(null);
+        heldItem.transform.position = dropPosition;
+        heldItem.transform.localScale = Vector3.one;
+        
+        heldItem.tag = "Item";
+        
+        Collider2D col = heldItem.GetComponent<Collider2D>();
+        if (col == null)
         {
-            Vector3 dropPosition = handPosition.position + transform.right * 1.0f;
-
-            
-            heldItem.transform.SetParent(null);
-            heldItem.transform.position = dropPosition;
-            heldItem.transform.localScale = Vector3.one;  
-            SpriteRenderer[] dropRenderers = heldItem.GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer sr in dropRenderers)
-            {
-                sr.sortingOrder = currentDropSortingOrder;
-            }
-            currentDropSortingOrder++;
-
-            heldItem = null;
+            BoxCollider2D boxCol = heldItem.AddComponent<BoxCollider2D>();
+            boxCol.isTrigger = true;
         }
+        else
+        {
+            col.enabled = true;
+        }
+        
+        Item itemScript = heldItem.GetComponent<Item>();
+        if (itemScript != null)
+        {
+            itemScript.enabled = true;
+        }
+        
+        PickUp_Item pickupScript = heldItem.GetComponent<PickUp_Item>();
+        if (pickupScript != null)
+        {
+            pickupScript.enabled = true;
+        }
+        else
+        {
+            heldItem.AddComponent<Item>();
+            heldItem.AddComponent<PickUp>();
+        }
+        
+        SpriteRenderer[] dropRenderers = heldItem.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sr in dropRenderers)
+        {
+            sr.sortingOrder = currentDropSortingOrder+150;
+        }
+        currentDropSortingOrder++;
+        
+        heldItem = null;
     }
+}
 
 }
