@@ -5,7 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 6ca70ea6024edad45975b766b0d6359b
+  - enabled: 1
+    path: Assets/Scenes/BookshelfDiamond.unity
+    guid: e12aa3c6953d2604f87001a4dbeee2e0
+  - enabled: 1
+    path: Assets/Scenes/BookshelfHeart.unity
+    guid: e01cabfd28cdf6c45b5f6d318aeab65c
+  - enabled: 1
+    path: Assets/Scenes/BookshelfSpade.unity
+    guid: 204339f6e9d5d174a9c8516a2ba10368
+  - enabled: 1
+    path: Assets/Scenes/BookshelfClover.unity
+    guid: f8e21f849583a7a41aa2206d5872bd5f
   m_configObjects: {}

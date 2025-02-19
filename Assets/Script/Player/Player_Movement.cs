@@ -45,12 +45,12 @@ public class Player_Movement : MonoBehaviour
         }
 
         // Animation
-        if(anim.GetInteger("hAxisRaw") != h)
+        if (anim.GetInteger("hAxisRaw") != h)
         {
             anim.SetBool("isChange", true);
             anim.SetInteger("hAxisRaw", (int)h);
         }
-        else if(anim.GetInteger("vAxisRaw") != v)
+        else if (anim.GetInteger("vAxisRaw") != v)
         {
             anim.SetBool("isChange", true);
             anim.SetInteger("vAxisRaw", (int)v);
@@ -65,6 +65,24 @@ public class Player_Movement : MonoBehaviour
     {
         // Move
         Vector2 moveVec = isHorizonMove ? new Vector2(h, 0) : new Vector2(0, v);
-        rigid.velocity = moveVec * Speed;
+        Vector2 targetPosition = rigid.position + moveVec * Speed * Time.fixedDeltaTime;
+
+        // 충돌 체크
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(targetPosition, 0.1f); // 작은 반경으로 충돌 체크
+        bool canMove = true;
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Furniture")) // "furniture" 태그가 있는 오브젝트와 충돌하면 이동 불가
+            {
+                canMove = false;
+                break;
+            }
+        }
+
+        if (canMove)
+        {
+            rigid.MovePosition(targetPosition); // 이동
+        }
     }
 }
