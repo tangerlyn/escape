@@ -12586,6 +12586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
+  handPosition: {fileID: 0}
+  heldItem: {fileID: 0}
 --- !u!61 &966087568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12719,7 +12721,7 @@ Transform:
   m_GameObject: {fileID: 966087565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -12.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24862,6 +24864,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.6, y: 5.5}
   m_EdgeRadius: 0
+--- !u!114 &1983688260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983688255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461e8fd68405b7c4d82f9b91c0e1d8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1986633542
 GameObject:
   m_ObjectHideFlags: 0
@@ -27248,7 +27262,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6693916530182441914, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6693916530182441914, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       propertyPath: m_SortingLayerID
@@ -27309,6 +27323,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6866495715729134266, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1983688259}
+    - targetCorrespondingSourceObject: {fileID: 6866495715729134266, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983688260}
   m_SourcePrefab: {fileID: 100100000, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
 --- !u!1001 &8920112005864522154
 PrefabInstance:

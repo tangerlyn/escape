@@ -8,7 +8,7 @@ public class Staircase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("플레이어가 계단에 접근했습니다. Floor2 씬으로 이동합니다.");
-            SceneManager.LoadScene("floor2");  
+            SceneManager.LoadScene("Second");  
         }
     }
 }
