@@ -9,7 +9,7 @@ public class BookshelfController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             // 이전 씬으로 돌아가기
-            SceneManager.LoadScene("GameScene"); // 원래 씬 이름
+            SceneManager.LoadScene("Second"); // 원래 씬 이름
         }
     }
 }

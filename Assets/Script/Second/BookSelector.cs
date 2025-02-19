@@ -99,6 +99,6 @@ public class BookSelector : MonoBehaviour
         PlayerPrefs.Save();
 
         // GameScene으로 전환
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Second");
     }
 }

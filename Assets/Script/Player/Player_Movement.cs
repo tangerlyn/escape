@@ -6,11 +6,11 @@ public class Player_Movement : MonoBehaviour
 {
     public float Speed;
 
-    Rigidbody2D rigid;
-    Animator anim;
-    float h;
-    float v;
-    bool isHorizonMove;
+    private Rigidbody2D rigid;
+    private Animator anim;
+    private float h;
+    private float v;
+    private bool isHorizonMove;
 
     private void Awake()
     {
@@ -85,4 +85,19 @@ public class Player_Movement : MonoBehaviour
             rigid.MovePosition(targetPosition); // 이동
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("충돌 발생: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("ChessPiece"))
+        {
+            ChessPiece chessPiece = collision.gameObject.GetComponent<ChessPiece>();
+            if (chessPiece != null)
+            {
+                chessPiece.Move(new Vector2(h, v)); // 플레이어 이동 방향으로 체스말 이동
+            }
+        }
+    }
+
 }

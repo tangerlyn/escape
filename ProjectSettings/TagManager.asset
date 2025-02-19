@@ -10,6 +10,13 @@ TagManager:
   - BookshelfClover
   - BookshelfHeart
   - BookshelfSpade
+  - Pawn
+  - Rook
+  - Knight
+  - Bishop
+  - Queen
+  - King
+  - ChessPiece
   layers:
   - Default
   - TransparentFX
@@ -52,6 +59,9 @@ TagManager:
     locked: 0
   - name: book
     uniqueID: 2043872727
+    locked: 0
+  - name: chessPiece
+    uniqueID: 2728660875
     locked: 0
   - name: Player
     uniqueID: 729909139

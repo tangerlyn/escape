@@ -24817,6 +24817,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7465277386006606667, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
   m_PrefabInstance: {fileID: 8017933233154453445}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1983688259
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983688255}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.6, y: 5.5}
+    newSize: {x: 3.6, y: 5.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.6, y: 5.5}
+  m_EdgeRadius: 0
 --- !u!1 &1986633542
 GameObject:
   m_ObjectHideFlags: 0
@@ -27201,13 +27246,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6693916530182441914, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693916530182441914, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 729909139
+      objectReference: {fileID: 0}
     - target: {fileID: 6866495715729134266, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       propertyPath: m_Name
       value: stair
       objectReference: {fileID: 0}
     - target: {fileID: 6866495715729134266, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7465277386006606667, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27252,7 +27305,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6866495715729134266, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983688259}
   m_SourcePrefab: {fileID: 100100000, guid: d4422d1c2ba807845a604c7cc501da0a, type: 3}
 --- !u!1001 &8920112005864522154
 PrefabInstance:
