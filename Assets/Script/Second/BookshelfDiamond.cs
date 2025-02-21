@@ -6,9 +6,13 @@ public class BookshelfDiamond : MonoBehaviour
 
     void Start()
     {
-        int selectedContainerIndex = PlayerPrefs.GetInt("BookshelfDiamond_SelectedContainerIndex", 0);
-        int selectedBookIndex = PlayerPrefs.GetInt("BookshelfDiamond_SelectedBookIndex", 0);
-        HighlightBook(selectedContainerIndex, selectedBookIndex);
+        int selectedContainerIndex = PlayerPrefs.GetInt("BookshelfDiamond_SelectedContainerIndex", -1);
+        int selectedBookIndex = PlayerPrefs.GetInt("BookshelfDiamond_SelectedBookIndex", -1);
+
+        if (selectedContainerIndex >= 0 && selectedBookIndex >= 0)
+        {
+            HighlightBook(selectedContainerIndex, selectedBookIndex);
+        }
     }
 
     void HighlightBook(int containerIndex, int bookIndex)
