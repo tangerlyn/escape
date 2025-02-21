@@ -9,17 +9,17 @@ public class BookshelfManager : MonoBehaviour
     private GameObject staircaseInstance;
 
     // 각 책장별로 지정된 인덱스 값
-    private int diamondContainerIndex = 0; // BookshelfDiamond
-    private int diamondBookIndex = 0;       // BookshelfDiamond
-
     private int heartContainerIndex = 0;    // BookshelfHeart
-    private int heartBookIndex = 0;          // BookshelfHeart
+    private int heartBookIndex = 1;          // BookshelfHeart
 
     private int spadeContainerIndex = 0;     // BookshelfSpade
-    private int spadeBookIndex = 0;          // BookshelfSpade
+    private int spadeBookIndex = 16;          // BookshelfSpade
 
-    private int cloverContainerIndex = 0;    // BookshelfClover
-    private int cloverBookIndex = 0;         // BookshelfClover
+    private int diamondContainerIndex = 2; // BookshelfDiamond
+    private int diamondBookIndex = 3;       // BookshelfDiamond
+
+    private int cloverContainerIndex = 1;    // BookshelfClover
+    private int cloverBookIndex = 6;         // BookshelfClover
 
     void Start()
     {
