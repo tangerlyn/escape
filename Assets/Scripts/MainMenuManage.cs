@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+[RequireComponent(typeof(PhotonView))]
 public class MainMenuManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button createRoomButton;
@@ -17,7 +18,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = false;
         ConnectToServer();
 
         createRoomButton.onClick.AddListener(OnCreateRoomClick);
@@ -45,8 +46,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     private void OnCreateRoomClick()
     {
         string roomCode = GenerateRoomCode();
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 2;
+        RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
         
         Debug.Log($"Creating room with code: {roomCode}");
         PhotonNetwork.CreateRoom(roomCode, roomOptions);
@@ -90,7 +90,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
             Debug.Log("두 명의 플레이어가 모두 참가했습니다. 게임을 시작합니다.");
             if (PhotonNetwork.IsMasterClient)
             {
-                StartGame();
+                photonView.RPC("RPC_LoadScenes", RpcTarget.All);
             }
         }
     }
@@ -102,25 +102,38 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                StartGame();
+                photonView.RPC("RPC_LoadScenes", RpcTarget.All);
             }
         }
     }
 
-    private void StartGame()
+    [PunRPC]
+    private void RPC_LoadScenes()
     {
-        Debug.Log("Loading GameScene...");
-        PhotonNetwork.LoadLevel("GameScene");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("Master client loading GameScene");
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+        else
+        {
+            Debug.Log("Non-master client loading EscapeScene");
+            PhotonNetwork.LoadLevel("EscapeScene");
+        }
     }
 
-    // 에러 처리 추가
+    // 에러 처리
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.LogError($"Room creation failed: {message}");
+        mainMenuPanel.SetActive(true);
+        waitingRoomPanel.SetActive(false);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.LogError($"Room join failed: {message}");
+        mainMenuPanel.SetActive(true);
+        joinRoomPanel.SetActive(false);
     }
 }

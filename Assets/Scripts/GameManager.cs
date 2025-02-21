@@ -4,15 +4,15 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    void Start()
+    private void Start()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("Playing as Player 1 in GameScene");
+            Debug.Log("Player 1 is in GameScene");
         }
         else
         {
-            PhotonNetwork.LoadLevel("EscapeScene");
+            Debug.Log("Player 2 is in EscapeScene");
         }
     }
 

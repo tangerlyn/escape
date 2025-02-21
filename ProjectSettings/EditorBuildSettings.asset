@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Second.unity
     guid: 6ca70ea6024edad45975b766b0d6359b
   - enabled: 1
+    path: Assets/Scenes/floor3.unity
+    guid: c14d398ff285ba140817283514af61b6
+  - enabled: 1
     path: Assets/Scenes/Fourth.unity
     guid: 9692c94ab6ff7f5419e8d0e428999184
   - enabled: 1
@@ -32,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BookshelfClover.unity
     guid: f8e21f849583a7a41aa2206d5872bd5f
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 88546ccf2c59cda4ca180c247f116bf9
   m_configObjects: {}

@@ -42,6 +42,9 @@ MonoBehaviour:
   - CantHearYou
   - ChangeColour
   - HeresWhy
+  - LoadScenesBasedOnRole
+  - RPC_LoadScenes
+  - RPC_LoadEndScene
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
