@@ -45,6 +45,7 @@ MonoBehaviour:
   - LoadScenesBasedOnRole
   - RPC_LoadScenes
   - RPC_LoadEndScene
+  - RPC_LoadMainMenuScene
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
