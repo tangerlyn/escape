@@ -3,12 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - instrument
+  - Furniture
+  - Bookshelf
+  - BookshelfDiamond
+  - BookshelfClover
+  - BookshelfHeart
+  - BookshelfSpade
+  - Pawn
+  - Rook
+  - Knight
+  - Bishop
+  - Queen
+  - King
+  - ChessPiece
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - itemLayer
   - Water
   - UI
   - 
@@ -40,4 +55,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Furniture
+    uniqueID: 622881201
+    locked: 0
+  - name: book
+    uniqueID: 2043872727
+    locked: 0
+  - name: chessPiece
+    uniqueID: 2728660875
+    locked: 0
+  - name: Player
+    uniqueID: 729909139
     locked: 0
