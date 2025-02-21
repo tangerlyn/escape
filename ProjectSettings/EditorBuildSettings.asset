@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BookshelfClover.unity
     guid: f8e21f849583a7a41aa2206d5872bd5f
   - enabled: 1
+    path: Assets/Scenes/Easel.unity
+    guid: 73437333d22953c479b2ab47b930a6e9
+  - enabled: 1
     path: Assets/Scenes/End.unity
     guid: 88546ccf2c59cda4ca180c247f116bf9
   m_configObjects: {}

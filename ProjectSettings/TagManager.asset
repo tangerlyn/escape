@@ -19,6 +19,7 @@ TagManager:
   - Queen
   - King
   - ChessPiece
+  - Easel
   layers:
   - Default
   - TransparentFX
