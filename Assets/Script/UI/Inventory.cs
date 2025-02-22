@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
@@ -172,6 +173,12 @@ public class Inventory : MonoBehaviour
 
     private void EquipSelectedItem()
     {
+        if (SceneManager.GetActiveScene().name.Equals("EscapeScene"))
+        {
+            Debug.Log("5층에서 사용 불가능");
+            return;
+        }
+
         InventorySlot selectedSlot = slots[selectedSlotIndex];
         if (!selectedSlot.isEmpty && selectedSlot.storedItem != null)
         {
