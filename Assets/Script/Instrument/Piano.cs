@@ -35,6 +35,7 @@ public class Piano : MonoBehaviour
 
     private IEnumerator PlayPianoClips()
     {
+        Debug.Log("피아노 재생");
         isPlaying = true;
         if (pianoClips != null && pianoClips.Length > 0)
         {
