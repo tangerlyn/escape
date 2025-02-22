@@ -9,7 +9,7 @@ public class PickUp_Item : MonoBehaviour
 
     void Update()
     {
-        if (canCollectItem && Input.GetKeyDown(KeyCode.E))
+        if (canCollectItem && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.F)))
         {
             CollectItem(); 
         }

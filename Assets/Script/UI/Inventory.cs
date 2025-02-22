@@ -146,7 +146,7 @@ public class Inventory : MonoBehaviour
             if (zoomedSlot.slotObj.transform.childCount > 0)
             {
                 RectTransform itemRect = zoomedSlot.slotObj.transform.GetChild(0).GetComponent<RectTransform>();
-                itemRect.localScale = new Vector3(2f, 2f, 2f);
+                itemRect.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             }
 
             float adjustedX = slot4Rect.anchoredPosition.x - 150f;

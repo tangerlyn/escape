@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Drawer2Interaction : MonoBehaviour
+public class DrawerInteraction : MonoBehaviour
 {
     private bool isPlayerNearby = false;
     public List<GameObject> closedDrawerImages; // 닫힌 서랍 이미지 오브젝트 리스트
@@ -24,19 +24,19 @@ public class Drawer2Interaction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("desk1"))
+        if (collision.CompareTag("desk2"))
         {
             isPlayerNearby = true;
-            Debug.Log("플레이어가 서랍2에 가까이 왔습니다.");
+            Debug.Log("플레이어가 서랍에 가까이 왔습니다.");
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("desk1"))
+        if (collision.CompareTag("desk2"))
         {
             isPlayerNearby = false;
-            Debug.Log("플레이어가 서랍2에서 멀어졌습니다.");
+            Debug.Log("플레이어가 서랍에서 멀어졌습니다.");
         }
     }
 
