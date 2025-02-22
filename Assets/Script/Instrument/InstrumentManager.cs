@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InstrumentManager : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class InstrumentManager : MonoBehaviour
     public Transform staircaseSpawnPoint;
 
     private bool puzzleSolved = false;
+    private GameObject staircaseInstance; // 계단 인스턴스
 
     private void Awake()
     {
@@ -52,9 +52,11 @@ public class InstrumentManager : MonoBehaviour
 
     private void SpawnStaircase()
     {
+        Debug.Log("계단 생성");
         if (staircasePrefab != null && staircaseSpawnPoint != null)
         {
-            Instantiate(staircasePrefab, staircaseSpawnPoint.position, Quaternion.identity);
+            staircaseInstance = Instantiate(staircasePrefab, staircaseSpawnPoint.position, Quaternion.identity);
+            staircaseInstance.SetActive(true); // 계단 활성화
         }
         else
         {
